@@ -1,0 +1,158 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html,
+body {
+  font-family: Helvetica Neue, sans-serif;
+}
+
+body {
+  height: 100vh;
+  background: #2196f3;
+}
+
+@media screen and (max-width: 500px) {
+  body {
+    height: auto;
+    min-height: 100vh;
+    background: none;
+  }
+}
+
+@keyframes fadein {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 10px, 0);
+  }
+
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+.wrapper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: auto;
+  width: 500px;
+  height: 820px;
+  background-color: #fff;
+  overflow: hidden;
+  border-radius: 5px;
+  box-shadow: 0 20px 80px rgba(0, 0, 0, 0.6);
+  animation: fadein 1s;
+}
+
+@media screen and (max-width: 500px) {
+  .wrapper {
+    width: 100%;
+    height: 100vh;
+    margin: 0;
+    overflow: scroll;
+    box-shadow: none;
+    animation: none;
+  }
+}
+
+.wrapper__inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.info {
+  position: fixed;
+  top: 0;
+  right: 0;
+  padding: 15px 15px 12px 15px;
+  transition: background-color 300ms ease;
+}
+
+.info span {
+  display: none;
+}
+
+@media screen and (max-width: 500px) {
+  .info {
+    visibility: hidden;
+  }
+}
+
+.info svg {
+  width: 30px;
+  height: 30px;
+  fill: #fff;
+  transition: fill 300ms ease;
+}
+
+.info:hover svg {
+  fill: #333;
+}
+
+.sound-item {
+  width: auto;
+  height: 100px;
+}
+
+.sound-item:hover {
+  width: auto;
+  height: 100px;
+  background-color: #f2f2f2;
+}
+
+.sound-item-playing {
+  width: auto;
+  height: 100px;
+  background-color: #f2f2f2;
+}
+
+.icon {
+  display: flex;
+  justify-content: center;
+  padding-top: 20px;
+  cursor: pointer;
+}
+
+.icon-playing {
+  display: flex;
+  justify-content: center;
+  padding-top: 10px;
+  cursor: pointer;
+}
+
+.slider {
+  padding-right: 20px;
+  padding-left: 20px;
+}
+
+.main-player {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  bottom: 0;
+}
+
+.material-icons.md-24 {
+  font-size: 24px;
+}
+.material-icons.md-36 {
+  font-size: 36px;
+}
+.material-icons.md-48 {
+  font-size: 48px;
+}
+
+.volume-badge {
+  top: 1;
+  right: -15;
+  border: 2px solid white;
+}
