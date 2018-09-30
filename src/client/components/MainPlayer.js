@@ -33,7 +33,8 @@ const MainPlayer = (props) => {
   return (
     <Paper className="main-player">
       <IconButton aria-label="Timer">
-        <i className="material-icons md-36">timer</i>
+        <i className="material-icons md-24">timer</i>
+        <h4>1</h4>
       </IconButton>
       <IconButton onClick={pauseAll} aria-label="Play/pause">
         {isPaused ? (
