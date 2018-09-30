@@ -5,20 +5,15 @@ import Grid from '@material-ui/core/Grid';
 
 import SoundItem from './SoundItem';
 
-const styles = theme => ({
+const styles = () => ({
   root: {
     flexGrow: 1
-  },
-  paper: {
-    padding: theme.spacing.unit * 2,
-    textAlign: 'center',
-    color: theme.palette.text.secondary
   }
 });
 
 function SoundLists(props) {
   const {
-    classes, sounds, onPlaySound, onChangeSoundVolume, onResetIsPaused
+    classes, sounds, onToggleSound, onChangeSoundVolume, onResetIsPaused
   } = props;
 
   return (
@@ -27,7 +22,7 @@ function SoundLists(props) {
         <Grid item xs={4}>
           <SoundItem
             sound={sounds[0]}
-            onPlaySound={onPlaySound}
+            onToggleSound={onToggleSound}
             onChangeSoundVolume={onChangeSoundVolume}
             onResetIsPaused={onResetIsPaused}
           />
@@ -35,7 +30,7 @@ function SoundLists(props) {
         <Grid item xs={4}>
           <SoundItem
             sound={sounds[1]}
-            onPlaySound={onPlaySound}
+            onToggleSound={onToggleSound}
             onChangeSoundVolume={onChangeSoundVolume}
             onResetIsPaused={onResetIsPaused}
           />
@@ -43,7 +38,7 @@ function SoundLists(props) {
         <Grid item xs={4}>
           <SoundItem
             sound={sounds[2]}
-            onPlaySound={onPlaySound}
+            onToggleSound={onToggleSound}
             onChangeSoundVolume={onChangeSoundVolume}
             onResetIsPaused={onResetIsPaused}
           />
@@ -54,7 +49,11 @@ function SoundLists(props) {
 }
 
 SoundLists.propTypes = {
-  classes: PropTypes.object.isRequired
+  classes: PropTypes.object.isRequired,
+  sounds: PropTypes.any.isRequired,
+  onToggleSound: PropTypes.func.isRequired,
+  onChangeSoundVolume: PropTypes.func.isRequired,
+  onResetIsPaused: PropTypes.func.isRequired
 };
 
 export default withStyles(styles)(SoundLists);

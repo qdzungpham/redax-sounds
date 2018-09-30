@@ -3,7 +3,11 @@ import {
   CHANGE_SOUND_VOLUME,
   TOGGLE_PAUSE,
   TOGGLE_PAUSE_MAIN_PLAYER,
-  RESET_IS_PAUSED
+  RESET_IS_PAUSED,
+  CHANGE_SYSTEM_VOLUME,
+  TOGGLE_SOUND_MANAGER_DIALOG,
+  TOGGLE_TIMER_DIALOG,
+  ENABLE_TIMER
 } from './constants';
 
 const setAllIsPausedFalse = (state) => {
@@ -81,7 +85,11 @@ const initialMainPlayer = {
   soundsPlaying: [],
   numSoundsPlaying: 0,
   isPlaying: false,
-  isPaused: false
+  isPaused: false,
+  isSoundMangerDialogOpen: false,
+  isTimerDialogOpen: false,
+  systemVolume: 100,
+  timer: 0
 };
 
 export const mainPlayerReducer = (state = initialMainPlayer, action) => {
@@ -111,6 +119,26 @@ export const mainPlayerReducer = (state = initialMainPlayer, action) => {
       return {
         ...state,
         isPaused: false
+      };
+    case TOGGLE_SOUND_MANAGER_DIALOG:
+      return {
+        ...state,
+        isSoundMangerDialogOpen: action.payload
+      };
+    case CHANGE_SYSTEM_VOLUME:
+      return {
+        ...state,
+        systemVolume: action.payload
+      };
+    case TOGGLE_TIMER_DIALOG:
+      return {
+        ...state,
+        isTimerDialogOpen: action.payload
+      };
+    case ENABLE_TIMER:
+      return {
+        ...state,
+        timer: action.payload
       };
     default:
       return state;

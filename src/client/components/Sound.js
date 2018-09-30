@@ -1,45 +1,8 @@
-import React from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { Howl } from 'howler';
 
-const pendingCalls = [];
-let initialized = false;
-
-export const soundManager = require('soundmanager2/script/soundmanager2-nodebug');
-// Allow server side rendering
-if (typeof window !== 'undefined') {
-  if (process.env.NODE_ENV !== 'production') {
-    ({ soundManager } = require('soundmanager2'));
-  } else {
-    ({ soundManager } = require('soundmanager2/script/soundmanager2-nodebug'));
-  }
-
-  soundManager.onready(() => {
-    pendingCalls.slice().forEach(cb => cb());
-  });
-}
-
-function createSound(options, cb) {
-  if (soundManager.ok()) {
-    cb(soundManager.createSound(options));
-    return () => {};
-  }
-  if (!initialized) {
-    initialized = true;
-    soundManager.beginDelayedInit();
-  }
-
-  const call = () => {
-    cb(soundManager.createSound(options));
-  };
-
-  pendingCalls.push(call);
-
-  return () => {
-    pendingCalls.splice(pendingCalls.indexOf(call), 1);
-  };
-}
-
-function noop() {}
+const noop = () => {};
 
 const playStatuses = {
   PLAYING: 'PLAYING',
@@ -47,180 +10,265 @@ const playStatuses = {
   PAUSED: 'PAUSED'
 };
 
-export default class Sound extends React.Component {
+class ReactHowler extends Component {
   static status = playStatuses;
 
-  static propTypes = {
-    url: PropTypes.string.isRequired,
-    playStatus: PropTypes.oneOf(Object.keys(playStatuses)).isRequired,
-    position: PropTypes.number,
-    playFromPosition: PropTypes.number,
-    volume: PropTypes.number,
-    playbackRate: PropTypes.number,
-    onError: PropTypes.func,
-    onLoading: PropTypes.func,
-    onLoad: PropTypes.func,
-    onPlaying: PropTypes.func,
-    onPause: PropTypes.func,
-    onResume: PropTypes.func,
-    onStop: PropTypes.func,
-    onFinishedPlaying: PropTypes.func,
-    onBufferChange: PropTypes.func,
-    autoLoad: PropTypes.bool,
-    loop: PropTypes.bool
-  };
-
-  static defaultProps = {
-    volume: 100,
-    playbackRate: 1,
-    onError: noop,
-    onLoading: noop,
-    onPlaying: noop,
-    onLoad: noop,
-    onPause: noop,
-    onResume: noop,
-    onStop: noop,
-    onFinishedPlaying: noop,
-    onBufferChange: noop,
-    autoLoad: false,
-    loop: false
-  };
+  constructor(props) {
+    super(props);
+    this.initHowler = this.initHowler.bind(this);
+  }
 
   componentDidMount() {
-    this.createSound(sound => this.updateSound(sound));
+    this.initHowler();
+  }
+
+  componentWillReceiveProps(props) {
+    // The src prop must be either a string or an array of strings
+    // Because of this, we can use it's JSON representation to check for changes
+    if (JSON.stringify(props.src) !== JSON.stringify(this.props.src)) {
+      this.initHowler(props);
+    } else {
+      this.toggleHowler(props);
+    }
   }
 
   componentWillUnmount() {
-    this.removeSound();
+    this.destroyHowler();
   }
 
-  componentDidUpdate(prevProps) {
-    if (this.props.url !== prevProps.url) {
-      this.createSound(sound => this.updateSound(sound, prevProps));
+  set howler(howl) {
+    if (howl) {
+      this._howler = howl;
+    }
+  }
+
+  get howler() {
+    return this._howler;
+  }
+
+  /**
+   * Create howler object with given props
+   */
+  initHowler(props = this.props) {
+    this.destroyHowler();
+    if (typeof Howl !== 'undefined') {
+      // Check if window is available
+      this.howler = new Howl({
+        src: props.src,
+        format: props.format,
+        mute: props.mute,
+        loop: props.loop,
+        preload: props.preload,
+        volume: props.volume,
+        onend: props.onEnd,
+        onplay: props.onPlay,
+        onpause: props.onPause,
+        onvolume: props.onVolume,
+        onstop: props.onStop,
+        onload: props.onLoad,
+        onloaderror: props.onLoadError,
+        html5: props.html5
+      });
+
+      if (props.playStatus === playStatuses.PLAYING) {
+        this.play();
+      }
+    }
+  }
+
+  /**
+   * Stop, unload and destroy howler object
+   */
+  destroyHowler() {
+    if (this.howler) {
+      this.howler.off(); // Remove event listener
+      this.howler.stop(); // Stop playback
+      this.howler.unload(); // Remove sound from pool
+      this.howler = null; // Destroy it
+    }
+  }
+
+  toggleHowler(props) {
+    if (props.playStatus === playStatuses.PLAYING) {
+      this.play();
+    } else if (props.playStatus === playStatuses.PAUSED) {
+      this.pause();
+    } else if (props.playStatus === playStatuses.STOPPED) {
+      this.stop();
+    }
+
+    this.loop(props.loop);
+
+    if (props.mute !== this.props.mute) {
+      this.mute(props.mute);
+    }
+
+    if (props.volume !== this.props.volume) {
+      this.volume(props.volume);
+    }
+
+    if (typeof props.seek !== 'undefined' && props.seek !== this.seek()) {
+      this.seek(props.seek);
+    }
+
+    if (props.preload && this.howlerState() === 'unloaded') {
+      this.load();
+    }
+  }
+
+  /**
+   * Begins playback of a sound when not playing
+   */
+  play() {
+    const playing = this.howler.playing();
+
+    if (!playing) {
+      // Automatically load if we're trying to play
+      // and the howl is not loaded
+      if (this.howlerState() === 'unloaded') {
+        this.load();
+      }
+
+      this.howler.play();
+    }
+  }
+
+  /**
+   * Pauses playback of sound or group
+   * If no id given, pauses all playback
+   * @param {Number} id = undefined [sound of group to pause]
+   */
+  pause(id = undefined) {
+    if (id) {
+      this.howler.pause(id);
     } else {
-      this.updateSound(this.sound);
+      this.howler.pause();
     }
   }
 
-  updateSound(sound, prevProps = {}) {
-    if (!sound) {
-      return;
-    }
+  /**
+   * Check the load status of the Howl
+   * @return {String} [unloaded, loading or loaded]
+   */
+  howlerState() {
+    return this.howler.state();
+  }
 
-    if (this.props.playStatus === playStatuses.PLAYING) {
-      if (sound.playState === 0) {
-        sound.play();
-      }
-
-      if (sound.paused) {
-        sound.resume();
-      }
-    } else if (this.props.playStatus === playStatuses.STOPPED) {
-      if (sound.playState !== 0) {
-        sound.stop();
-      }
+  /**
+   * Stops playback of sound or group
+   * If no id given, stops all playback
+   * @param {Number} id = undefined [sound of group to pause]
+   */
+  stop(id = undefined) {
+    if (id) {
+      this.howler.stop(id);
     } else {
-      // this.props.playStatus === playStatuses.PAUSED
-      if (!sound.paused) {
-        sound.pause();
-      }
-    }
-
-    if (this.props.playFromPosition != null) {
-      if (this.props.playFromPosition !== prevProps.playFromPosition) {
-        sound.setPosition(this.props.playFromPosition);
-      }
-    }
-
-    if (this.props.position != null) {
-      if (
-        sound.position !== this.props.position
-        && Math.round(sound.position) !== Math.round(this.props.position)
-      ) {
-        sound.setPosition(this.props.position);
-      }
-    }
-
-    if (this.props.volume !== prevProps.volume) {
-      sound.setVolume(this.props.volume);
-    }
-
-    if (this.props.playbackRate !== prevProps.playbackRate) {
-      sound.setPlaybackRate(this.props.playbackRate);
+      this.howler.stop();
     }
   }
 
-  createSound(callback) {
-    this.removeSound();
-
-    const instance = this;
-
-    if (!this.props.url) {
-      return;
-    }
-
-    this.stopCreatingSound = createSound(
-      {
-        url: this.props.url,
-        autoLoad: this.props.autoLoad,
-        volume: this.props.volume,
-        position: this.props.playFromPosition || this.props.position || 0,
-        playbackRate: this.props.playbackRate,
-        whileloading() {
-          instance.props.onLoading(this);
-        },
-        whileplaying() {
-          instance.props.onPlaying(this);
-        },
-        onerror(errorCode, description) {
-          instance.props.onError(errorCode, description, this);
-        },
-        onload() {
-          instance.props.onLoad(this);
-        },
-        onpause() {
-          instance.props.onPause(this);
-        },
-        onresume() {
-          instance.props.onResume(this);
-        },
-        onstop() {
-          instance.props.onStop(this);
-        },
-        onfinish() {
-          if (instance.props.loop && instance.props.playStatus === playStatuses.PLAYING) {
-            instance.sound.play();
-          } else {
-            instance.props.onFinishedPlaying();
-          }
-        },
-        onbufferchange() {
-          instance.props.onBufferChange(this.isBuffering);
-        }
-      },
-      (sound) => {
-        this.sound = sound;
-        callback(sound);
-      }
-    );
+  /**
+   * Mutes the sound, but doesn't pause the playback.
+   * @param {Boolean} [muted] [True to mute and false to unmute]
+   * @param {Number} [id] [The sound ID. If none is passed, all sounds in group are muted]
+   */
+  mute(...args) {
+    this.howler.mute(...args);
   }
 
-  removeSound() {
-    if (this.stopCreatingSound) {
-      this.stopCreatingSound();
-      delete this.stopCreatingSound;
+  /**
+   * Get/set volume of this sound or the group. This method optionally takes 0, 1 or 2 arguments.
+   * @param {Number} [volume] [Volume from 0.0 to 1.0]
+   * @param {Number} [id] [The sound ID. If none is passed, all sounds in group are muted]
+   */
+  volume(...args) {
+    return this.howler.volume(...args);
+  }
+
+  /**
+   * Get/set whether to loop the sound or group. This method can optionally take 0, 1 or 2 arguments.
+   * @param {Boolean} [loop] [To loop or not to loop, that is the question]
+   * @param {Number} [id] [The sound ID. If none is passed, all sounds in group will have their loop property updated]
+   */
+  loop(...args) {
+    return this.howler.loop(...args);
+  }
+
+  /**
+   * Set/get current position of player
+   * @param  {Number} pos [seek player to position]
+   * @return {Number}     [return current position]
+   */
+  seek(pos = null) {
+    if (!this.howler) {
+      return 0;
     }
 
-    if (this.sound) {
-      try {
-        this.sound.destruct();
-      } catch (e) {} // eslint-disable-line
+    if (!pos && pos !== 0) {
+      return this.howler.seek();
+    }
 
-      delete this.sound;
+    if (pos || pos === 0) {
+      this.howler.seek(pos);
+      return pos;
     }
   }
 
+  /**
+   * Get the duration of the audio source
+   * @return {Number} [Audio length in seconds. Will return 0 until after the load event fires]
+   */
+  duration() {
+    return this.howler.duration();
+  }
+
+  /**
+   * load audio file
+   */
+  load() {
+    this.howler.load();
+  }
+
+  /**
+   * Only render a placeholder
+   */
   render() {
-    return null;
+    return React.createElement('div', null);
   }
 }
+
+ReactHowler.propTypes = {
+  src: PropTypes.oneOfType([PropTypes.string, PropTypes.arrayOf(PropTypes.string)]).isRequired,
+  format: PropTypes.arrayOf(PropTypes.string),
+  playStatus: PropTypes.oneOf(Object.keys(playStatuses)).isRequired,
+  mute: PropTypes.bool,
+  loop: PropTypes.bool,
+  preload: PropTypes.bool,
+  volume: PropTypes.number,
+  onEnd: PropTypes.func,
+  onPause: PropTypes.func,
+  onPlay: PropTypes.func,
+  onVolume: PropTypes.func,
+  onStop: PropTypes.func,
+  onLoad: PropTypes.func,
+  onLoadError: PropTypes.func,
+  html5: PropTypes.bool
+};
+
+ReactHowler.defaultProps = {
+  format: [],
+  mute: false,
+  preload: true,
+  loop: false,
+  volume: 1.0,
+  onEnd: noop,
+  onPause: noop,
+  onPlay: noop,
+  onVolume: noop,
+  onStop: noop,
+  onLoad: noop,
+  onLoadError: noop,
+  html5: false
+};
+
+export default ReactHowler;

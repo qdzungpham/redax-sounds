@@ -97,39 +97,40 @@ body {
 }
 
 .sound-item {
-  width: auto;
-  height: 100px;
-}
-
-.sound-item:hover {
-  width: auto;
-  height: 100px;
-  background-color: #f2f2f2;
+  cursor: pointer;
 }
 
 .sound-item-playing {
-  width: auto;
-  height: 100px;
   background-color: #f2f2f2;
+  cursor: pointer;
 }
 
 .icon {
   display: flex;
   justify-content: center;
   padding-top: 20px;
-  cursor: pointer;
+  padding-bottom: 20px;
 }
 
 .icon-playing {
   display: flex;
   justify-content: center;
   padding-top: 10px;
-  cursor: pointer;
 }
 
 .slider {
   padding-right: 20px;
   padding-left: 20px;
+}
+
+.slider-dialog {
+  width: 120px;
+  margin-left: 15px;
+  margin-right: 15px;
+}
+
+.slider-system {
+  width: 150px;
 }
 
 .main-player {
@@ -139,6 +140,10 @@ body {
   justify-content: center;
   width: 100%;
   bottom: 0;
+}
+
+.material-icons.md-16 {
+  font-size: 16px;
 }
 
 .material-icons.md-24 {
@@ -155,4 +160,8 @@ body {
   top: 1;
   right: -15;
   border: 2px solid white;
+}
+
+.timer-dialog {
+  width: 200px;
 }
