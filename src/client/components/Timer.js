@@ -42,6 +42,7 @@ class Timer extends React.Component {
     if (min === 0 && sec === 0) {
       clearInterval(this.intervalHandle);
       this.props.pauseAll();
+      this.props.onEnableTimer(0);
     }
 
     this.secondsRemaining -= 1;
@@ -58,11 +59,22 @@ class Timer extends React.Component {
     const openTimerDialog = () => {
       onToggleTimerDialog(true);
     };
+
+    let minText = minutes;
+    let secText = seconds;
+    if (minutes < 10) {
+      minText = `0${minutes}`;
+    }
+    if (seconds < 10) {
+      secText = `0${seconds}`;
+    }
     return (
       <Button onClick={openTimerDialog}>
-        {minutes}
+        <h6 className="timer-text">
+          {minText}
 :
-        {seconds}
+          {secText}
+        </h6>
       </Button>
     );
   }

@@ -35,7 +35,7 @@ const SoundItem = ({
         onKeyPress={toggleSound}
         role="presentation"
       >
-        <Icon name={sound.icon} width={50} />
+        <Icon className="sound-item-icon" name={sound.icon} />
       </div>
       <Sound src={BASE_URL + sound.audioUrl} playStatus={status} volume={sound.volume / 100} loop />
 

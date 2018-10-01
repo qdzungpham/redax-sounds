@@ -1,4 +1,5 @@
 import {
+  SOUND_LIST,
   TOGGLE_PLAY,
   CHANGE_SOUND_VOLUME,
   TOGGLE_PAUSE,
@@ -20,33 +21,7 @@ const setAllIsPausedFalse = (state) => {
 };
 
 const initialSoundPlayers = {
-  0: {
-    id: 0,
-    name: 'Light Rain',
-    isPlaying: false,
-    isPaused: false,
-    volume: 50,
-    audioUrl: 'rain_light.ogg',
-    icon: 'rainLight'
-  },
-  1: {
-    id: 1,
-    name: 'Normal Rain',
-    isPlaying: false,
-    isPaused: false,
-    volume: 50,
-    audioUrl: 'rain_normal.ogg',
-    icon: 'rainNormal'
-  },
-  2: {
-    id: 2,
-    name: 'Thunders',
-    isPlaying: false,
-    isPaused: false,
-    volume: 50,
-    audioUrl: 'rain_thunders.ogg',
-    icon: 'rainThunders'
-  }
+  ...SOUND_LIST
 };
 
 export const soundPlayersReducer = (state = initialSoundPlayers, action) => {

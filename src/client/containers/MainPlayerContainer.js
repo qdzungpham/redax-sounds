@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import MainPlayer from '../components/MainPlayer';
@@ -74,6 +74,7 @@ const MainPlayerContainer = (props) => {
           onToggleSoundMangerDialog={onToggleSoundMangerDialog}
           onToggleTimerDialog={onToggleTimerDialog}
           timer={timer}
+          onEnableTimer={onEnableTimer}
         />
       )}
 
@@ -96,6 +97,26 @@ const MainPlayerContainer = (props) => {
       />
     </div>
   );
+};
+
+MainPlayerContainer.propTypes = {
+  sounds: PropTypes.any.isRequired,
+  soundsPlaying: PropTypes.array.isRequired,
+  isPlaying: PropTypes.bool.isRequired,
+  onTogglePauseSound: PropTypes.func.isRequired,
+  isPaused: PropTypes.bool.isRequired,
+  onTogglePauseMainPlayer: PropTypes.func.isRequired,
+  numSoundsPlaying: PropTypes.number.isRequired,
+  isSoundMangerDialogOpen: PropTypes.bool.isRequired,
+  onToggleSoundMangerDialog: PropTypes.func.isRequired,
+  onChangeSoundVolume: PropTypes.func.isRequired,
+  onToggleSound: PropTypes.func.isRequired,
+  systemVolume: PropTypes.number.isRequired,
+  onChangeSystemVolume: PropTypes.func.isRequired,
+  isTimerDialogOpen: PropTypes.bool.isRequired,
+  onToggleTimerDialog: PropTypes.func.isRequired,
+  timer: PropTypes.number.isRequired,
+  onEnableTimer: PropTypes.func.isRequired
 };
 
 export default connect(

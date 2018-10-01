@@ -5,7 +5,6 @@ import Divider from '@material-ui/core/Divider';
 import Slider from '@material-ui/lab/Slider';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
-import Typography from '@material-ui/core/Typography';
 import { Howler } from 'howler';
 import DialogSoundItem from './DialogSoundItem';
 
@@ -35,9 +34,7 @@ const SoundManagerDialog = (props) => {
       <div>
         <List>
           {soundsPlaying.length === 0 ? (
-            <Typography variant="subheading" gutterBottom>
-              No sounds selected
-            </Typography>
+            <h4 className="no-sounds-text">No sounds selected</h4>
           ) : (
             soundsPlaying.map(id => (
               <DialogSoundItem
@@ -48,12 +45,11 @@ const SoundManagerDialog = (props) => {
               />
             ))
           )}
+          <Divider />
         </List>
-        <Divider />
+
         <List>
-          <Typography variant="subheading" gutterBottom>
-            System Volume
-          </Typography>
+          <h4>System Volume</h4>
           <ListItem>
             <ListItemIcon>
               <i className="material-icons md-24">volume_up</i>

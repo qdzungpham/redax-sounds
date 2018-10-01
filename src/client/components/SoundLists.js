@@ -16,33 +16,20 @@ function SoundLists(props) {
     classes, sounds, onToggleSound, onChangeSoundVolume, onResetIsPaused
   } = props;
 
+  const soundsArray = Object.values(sounds);
   return (
     <div className={classes.root}>
       <Grid container>
-        <Grid item xs={4}>
-          <SoundItem
-            sound={sounds[0]}
-            onToggleSound={onToggleSound}
-            onChangeSoundVolume={onChangeSoundVolume}
-            onResetIsPaused={onResetIsPaused}
-          />
-        </Grid>
-        <Grid item xs={4}>
-          <SoundItem
-            sound={sounds[1]}
-            onToggleSound={onToggleSound}
-            onChangeSoundVolume={onChangeSoundVolume}
-            onResetIsPaused={onResetIsPaused}
-          />
-        </Grid>
-        <Grid item xs={4}>
-          <SoundItem
-            sound={sounds[2]}
-            onToggleSound={onToggleSound}
-            onChangeSoundVolume={onChangeSoundVolume}
-            onResetIsPaused={onResetIsPaused}
-          />
-        </Grid>
+        {soundsArray.map(sound => (
+          <Grid key={sound.id} item xs={4}>
+            <SoundItem
+              sound={sounds[sound.id]}
+              onToggleSound={onToggleSound}
+              onChangeSoundVolume={onChangeSoundVolume}
+              onResetIsPaused={onResetIsPaused}
+            />
+          </Grid>
+        ))}
       </Grid>
     </div>
   );

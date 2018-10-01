@@ -2,9 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import IconButton from '@material-ui/core/IconButton';
-import Paper from '@material-ui/core/Paper';
 import Badge from '@material-ui/core/Badge';
-import Button from '@material-ui/core/Button';
 import Timer from './Timer';
 
 const styles = () => ({
@@ -26,7 +24,8 @@ const MainPlayer = (props) => {
     onTogglePauseMainPlayer,
     onToggleSoundMangerDialog,
     onToggleTimerDialog,
-    timer
+    timer,
+    onEnableTimer
   } = props;
 
   const pauseAll = () => {
@@ -45,13 +44,18 @@ const MainPlayer = (props) => {
   };
 
   return (
-    <Paper className="main-player">
+    <div className="main-player">
       {timer === 0 ? (
         <IconButton onClick={openTimerDialog} aria-label="Timer">
           <i className="material-icons md-36">timer</i>
         </IconButton>
       ) : (
-        <Timer pauseAll={pauseAll} onToggleTimerDialog={onToggleTimerDialog} minutes={timer} />
+        <Timer
+          onEnableTimer={onEnableTimer}
+          pauseAll={pauseAll}
+          onToggleTimerDialog={onToggleTimerDialog}
+          minutes={timer}
+        />
       )}
       <IconButton onClick={pauseAll} aria-label="Play/pause">
         {isPaused ? (
@@ -65,8 +69,21 @@ const MainPlayer = (props) => {
           <i className="material-icons md-36">volume_up</i>
         </Badge>
       </IconButton>
-    </Paper>
+    </div>
   );
+};
+
+MainPlayer.propTypes = {
+  classes: PropTypes.object.isRequired,
+  soundsPlaying: PropTypes.array.isRequired,
+  onTogglePauseSound: PropTypes.func.isRequired,
+  isPaused: PropTypes.bool.isRequired,
+  onTogglePauseMainPlayer: PropTypes.func.isRequired,
+  numSoundsPlaying: PropTypes.number.isRequired,
+  onToggleSoundMangerDialog: PropTypes.func.isRequired,
+  onToggleTimerDialog: PropTypes.func.isRequired,
+  timer: PropTypes.number.isRequired,
+  onEnableTimer: PropTypes.func.isRequired
 };
 
 export default withStyles(styles)(MainPlayer);

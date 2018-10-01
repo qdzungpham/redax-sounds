@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import Slider from '@material-ui/lab/Slider';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
@@ -32,6 +33,12 @@ const DialogSoundItem = (props) => {
       </ListItemSecondaryAction>
     </ListItem>
   );
+};
+
+DialogSoundItem.propTypes = {
+  sound: PropTypes.object.isRequired,
+  onChangeSoundVolume: PropTypes.func.isRequired,
+  onToggleSound: PropTypes.func.isRequired
 };
 
 export default DialogSoundItem;

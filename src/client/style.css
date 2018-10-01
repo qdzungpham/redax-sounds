@@ -14,7 +14,12 @@ body {
   background: #2196f3;
 }
 
-@media screen and (max-width: 500px) {
+h4 {
+  font-weight: 700;
+  color: #656565;
+  text-align: center;
+}
+@media screen and (max-width: 750px) {
   body {
     height: auto;
     min-height: 100vh;
@@ -44,13 +49,23 @@ body {
   width: 500px;
   height: 820px;
   background-color: #fff;
-  overflow: hidden;
   border-radius: 5px;
   box-shadow: 0 20px 80px rgba(0, 0, 0, 0.6);
   animation: fadein 1s;
 }
 
-@media screen and (max-width: 500px) {
+@media screen and (max-width: 750px) {
+  .wrapper {
+    width: 100%;
+    height: 100vh;
+    margin: 0;
+    overflow: scroll;
+    box-shadow: none;
+    animation: none;
+  }
+}
+
+@media screen and (max-height: 800px) {
   .wrapper {
     width: 100%;
     height: 100vh;
@@ -98,6 +113,12 @@ body {
 
 .sound-item {
   cursor: pointer;
+  height: 92px;
+}
+
+.sound-item-icon {
+  width: 50px;
+  height: 50px;
 }
 
 .sound-item-playing {
@@ -119,14 +140,13 @@ body {
 }
 
 .slider {
-  padding-right: 20px;
-  padding-left: 20px;
+  padding-right: 15px;
+  padding-left: 15px;
 }
 
 .slider-dialog {
   width: 120px;
-  margin-left: 15px;
-  margin-right: 15px;
+  margin-right: 10px;
 }
 
 .slider-system {
@@ -140,8 +160,15 @@ body {
   justify-content: center;
   width: 100%;
   bottom: 0;
+  margin-top: 20px;
+  box-shadow: 0px -2px 6px rgba(0, 0, 0, 0.1);
 }
 
+@media screen and (max-height: 800px) {
+  .main-player {
+    position: relative;
+  }
+}
 .material-icons.md-16 {
   font-size: 16px;
 }
@@ -164,4 +191,16 @@ body {
 
 .timer-dialog {
   width: 200px;
+}
+
+.no-sounds-text {
+  text-align: center;
+  padding-top: 15px;
+  padding-bottom: 20px;
+}
+
+.timer-text {
+  font-weight: 500;
+  color: #656565;
+  font-size: 16px;
 }
