@@ -4,6 +4,8 @@ import { Howl } from 'howler';
 
 const noop = () => {};
 
+const BASE_URL = 'https://s3-ap-southeast-2.amazonaws.com/redaxsounds/';
+
 const playStatuses = {
   PLAYING: 'PLAYING',
   STOPPED: 'STOPPED',
@@ -54,7 +56,7 @@ class ReactHowler extends Component {
     if (typeof Howl !== 'undefined') {
       // Check if window is available
       this.howler = new Howl({
-        src: [`${props.src}.webm`, `${props.src}.mp3`],
+        src: [`${BASE_URL}${props.src}.webm`, `${BASE_URL}${props.src}.mp3`],
         format: props.format,
         mute: props.mute,
         loop: props.loop,

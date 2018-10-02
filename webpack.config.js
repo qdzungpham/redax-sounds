@@ -1,6 +1,8 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
+const WorkboxPlugin = require('workbox-webpack-plugin');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 const outputDirectory = 'dist';
 
@@ -39,8 +41,9 @@ module.exports = {
   plugins: [
     new CleanWebpackPlugin([outputDirectory]),
     new HtmlWebpackPlugin({
-      template: './public/index.html',
-      favicon: './public/favicon.png'
-    })
+      template: './public/index.html'
+    }),
+    new WorkboxPlugin.GenerateSW(),
+    new CopyWebpackPlugin([{ from: 'src/pwa' }])
   ]
 };

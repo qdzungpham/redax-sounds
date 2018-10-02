@@ -4,8 +4,6 @@ import Slider from '@material-ui/lab/Slider';
 import Sound from './Sound';
 import Icon from '../icons';
 
-const BASE_URL = 'https://qdzungpham.com/';
-
 const SoundItem = ({
   sound, onToggleSound, onChangeSoundVolume, onResetIsPaused
 }) => {
@@ -37,7 +35,7 @@ const SoundItem = ({
       >
         <Icon className="sound-item-icon" name={sound.icon} />
       </div>
-      <Sound src={BASE_URL + sound.audioUrl} playStatus={status} volume={sound.volume / 100} loop />
+      <Sound src={sound.audioUrl} playStatus={status} volume={sound.volume / 100} loop />
 
       <div className="slider">
         <Slider hidden={!sound.isPlaying} value={sound.volume} onChange={onChangeVolume} />

@@ -8,6 +8,13 @@
     <meta name="Author" content="Dzung Pham">
     <meta name="Version" content="1.0">
     <meta name="Description" content="Relax and sleep with great collection of HD sounds that can be mixed into the perfect relaxing ambiences.">
+    <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+    <link rel="manifest" href="manifest.json">
+    <link rel="mask-icon" href="safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#ffc40d">
+    <meta name="theme-color" content="#E91E63">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500">
     <title>Redax Sounds</title>
 </head>
@@ -16,6 +23,15 @@
     <noscript>
         You need to enable JavaScript to run this app.
     </noscript>
+    <script>
+        // Check that service workers are registered
+        if ('serviceWorker' in navigator) {
+            // Use the window load event to keep the page load performant
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('service-worker.js');
+            });
+        }
+    </script>
     <div id="root"></div>
 </body>
 
