@@ -15,7 +15,7 @@ export const SOUND_LIST = {
     isPlaying: false,
     isPaused: false,
     volume: 50,
-    audioUrl: 'rain_light.ogg',
+    audioUrl: 'rain_light',
     icon: 'rain_light'
   },
   1: {
@@ -24,7 +24,7 @@ export const SOUND_LIST = {
     isPlaying: false,
     isPaused: false,
     volume: 50,
-    audioUrl: 'rain_normal.ogg',
+    audioUrl: 'rain_normal',
     icon: 'rain_normal'
   },
   2: {
@@ -33,7 +33,7 @@ export const SOUND_LIST = {
     isPlaying: false,
     isPaused: false,
     volume: 50,
-    audioUrl: 'rain_thunders.ogg',
+    audioUrl: 'rain_thunders',
     icon: 'rain_thunders'
   },
   3: {
@@ -42,7 +42,7 @@ export const SOUND_LIST = {
     isPlaying: false,
     isPaused: false,
     volume: 50,
-    audioUrl: 'rain_under_umbrella.ogg',
+    audioUrl: 'rain_under_umbrella',
     icon: 'rain_under_umbrella'
   },
   4: {
@@ -51,7 +51,7 @@ export const SOUND_LIST = {
     isPlaying: false,
     isPaused: false,
     volume: 50,
-    audioUrl: 'rain_on_roof.ogg',
+    audioUrl: 'rain_on_roof',
     icon: 'rain_on_roof'
   },
   5: {
@@ -60,7 +60,7 @@ export const SOUND_LIST = {
     isPlaying: false,
     isPaused: false,
     volume: 50,
-    audioUrl: 'rain_on_window.ogg',
+    audioUrl: 'rain_on_window',
     icon: 'rain_on_window'
   },
   6: {
@@ -69,7 +69,7 @@ export const SOUND_LIST = {
     isPlaying: false,
     isPaused: false,
     volume: 50,
-    audioUrl: 'rain_on_leaves.ogg',
+    audioUrl: 'rain_on_leaves',
     icon: 'rain_on_leaves'
   },
   7: {
@@ -78,7 +78,7 @@ export const SOUND_LIST = {
     isPlaying: false,
     isPaused: false,
     volume: 50,
-    audioUrl: 'rain_water.ogg',
+    audioUrl: 'rain_water',
     icon: 'rain_water'
   },
   8: {
@@ -87,7 +87,7 @@ export const SOUND_LIST = {
     isPlaying: false,
     isPaused: false,
     volume: 50,
-    audioUrl: 'rain_ocean.ogg',
+    audioUrl: 'rain_ocean',
     icon: 'rain_ocean'
   },
   9: {
@@ -96,7 +96,7 @@ export const SOUND_LIST = {
     isPlaying: false,
     isPaused: false,
     volume: 50,
-    audioUrl: 'forest_forest.ogg',
+    audioUrl: 'forest_forest',
     icon: 'forest_forest'
   },
   10: {
@@ -105,7 +105,7 @@ export const SOUND_LIST = {
     isPlaying: false,
     isPaused: false,
     volume: 50,
-    audioUrl: 'forest_creek.ogg',
+    audioUrl: 'forest_creek',
     icon: 'forest_creek'
   },
   11: {
@@ -114,7 +114,7 @@ export const SOUND_LIST = {
     isPlaying: false,
     isPaused: false,
     volume: 50,
-    audioUrl: 'forest_waterfall.ogg',
+    audioUrl: 'forest_waterfall',
     icon: 'forest_waterfall'
   },
   12: {
@@ -123,7 +123,7 @@ export const SOUND_LIST = {
     isPlaying: false,
     isPaused: false,
     volume: 50,
-    audioUrl: 'forest_birds.ogg',
+    audioUrl: 'forest_birds',
     icon: 'forest_birds'
   },
   13: {
@@ -132,7 +132,7 @@ export const SOUND_LIST = {
     isPlaying: false,
     isPaused: false,
     volume: 50,
-    audioUrl: 'forest_leaves.ogg',
+    audioUrl: 'forest_leaves',
     icon: 'forest_leaves'
   },
   14: {
@@ -141,7 +141,7 @@ export const SOUND_LIST = {
     isPlaying: false,
     isPaused: false,
     volume: 50,
-    audioUrl: 'forest_wind.ogg',
+    audioUrl: 'forest_wind',
     icon: 'forest_wind'
   },
   15: {
@@ -150,7 +150,7 @@ export const SOUND_LIST = {
     isPlaying: false,
     isPaused: false,
     volume: 50,
-    audioUrl: 'forest_fire.ogg',
+    audioUrl: 'forest_fire',
     icon: 'forest_fire'
   },
   16: {
@@ -159,7 +159,7 @@ export const SOUND_LIST = {
     isPlaying: false,
     isPaused: false,
     volume: 50,
-    audioUrl: 'forest_grasshoppers.ogg',
+    audioUrl: 'forest_grasshoppers',
     icon: 'forest_grasshoppers'
   },
   17: {
@@ -168,7 +168,7 @@ export const SOUND_LIST = {
     isPlaying: false,
     isPaused: false,
     volume: 50,
-    audioUrl: 'forest_frogs.ogg',
+    audioUrl: 'forest_frogs',
     icon: 'forest_frogs'
   },
   18: {
@@ -177,7 +177,7 @@ export const SOUND_LIST = {
     isPlaying: false,
     isPaused: false,
     volume: 50,
-    audioUrl: 'meditation_piano.ogg',
+    audioUrl: 'meditation_piano',
     icon: 'meditation_piano'
   },
   19: {
@@ -186,7 +186,7 @@ export const SOUND_LIST = {
     isPlaying: false,
     isPaused: false,
     volume: 50,
-    audioUrl: 'meditation_flute.ogg',
+    audioUrl: 'meditation_flute',
     icon: 'meditation_flute'
   },
   20: {
@@ -195,7 +195,7 @@ export const SOUND_LIST = {
     isPlaying: false,
     isPaused: false,
     volume: 50,
-    audioUrl: 'meditation_stones.ogg',
+    audioUrl: 'meditation_stones',
     icon: 'meditation_stones'
   },
   21: {
@@ -204,7 +204,7 @@ export const SOUND_LIST = {
     isPlaying: false,
     isPaused: false,
     volume: 50,
-    audioUrl: 'meditation_bowl.ogg',
+    audioUrl: 'meditation_bowl',
     icon: 'meditation_bowl'
   },
   22: {
@@ -213,7 +213,7 @@ export const SOUND_LIST = {
     isPlaying: false,
     isPaused: false,
     volume: 50,
-    audioUrl: 'meditation_bells.ogg',
+    audioUrl: 'meditation_bells',
     icon: 'meditation_bells'
   },
   23: {
@@ -222,7 +222,7 @@ export const SOUND_LIST = {
     isPlaying: false,
     isPaused: false,
     volume: 50,
-    audioUrl: 'meditation_wind_chimes.ogg',
+    audioUrl: 'meditation_wind_chimes',
     icon: 'meditation_wind_chimes'
   }
 };

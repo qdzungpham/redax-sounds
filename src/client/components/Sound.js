@@ -54,7 +54,7 @@ class ReactHowler extends Component {
     if (typeof Howl !== 'undefined') {
       // Check if window is available
       this.howler = new Howl({
-        src: props.src,
+        src: [`${props.src}.webm`, `${props.src}.mp3`],
         format: props.format,
         mute: props.mute,
         loop: props.loop,

@@ -3,7 +3,10 @@ import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import IconButton from '@material-ui/core/IconButton';
 import Badge from '@material-ui/core/Badge';
-import Timer from './Timer';
+import {
+  Timer, PlayArrow, Pause, VolumeUp
+} from '@material-ui/icons';
+import TimerComponent from './Timer';
 
 const styles = () => ({
   badge: {
@@ -47,10 +50,10 @@ const MainPlayer = (props) => {
     <div className="main-player">
       {timer === 0 ? (
         <IconButton onClick={openTimerDialog} aria-label="Timer">
-          <i className="material-icons md-36">timer</i>
+          <Timer className="material-icons md-36" />
         </IconButton>
       ) : (
-        <Timer
+        <TimerComponent
           onEnableTimer={onEnableTimer}
           pauseAll={pauseAll}
           onToggleTimerDialog={onToggleTimerDialog}
@@ -59,14 +62,14 @@ const MainPlayer = (props) => {
       )}
       <IconButton onClick={pauseAll} aria-label="Play/pause">
         {isPaused ? (
-          <i className="material-icons md-48">play_arrow</i>
+          <PlayArrow className="material-icons md-48" />
         ) : (
-          <i className="material-icons md-48">pause</i>
+          <Pause className="material-icons md-48" />
         )}
       </IconButton>
       <IconButton onClick={openSoundManager} aria-label="Volumes">
         <Badge badgeContent={numSoundsPlaying} color="primary" classes={{ badge: classes.badge }}>
-          <i className="material-icons md-36">volume_up</i>
+          <VolumeUp className="material-icons md-36" />
         </Badge>
       </IconButton>
     </div>

@@ -5,6 +5,7 @@ import Divider from '@material-ui/core/Divider';
 import Slider from '@material-ui/lab/Slider';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
+import { VolumeUp } from '@material-ui/icons';
 import { Howler } from 'howler';
 import DialogSoundItem from './DialogSoundItem';
 
@@ -52,7 +53,7 @@ const SoundManagerDialog = (props) => {
           <h4>System Volume</h4>
           <ListItem>
             <ListItemIcon>
-              <i className="material-icons md-24">volume_up</i>
+              <VolumeUp className="material-icons md-24" />
             </ListItemIcon>
             <div className="slider-system">
               <Slider value={systemVolume} onChange={changeSystemVolume} />
