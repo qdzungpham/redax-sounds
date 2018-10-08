@@ -20,6 +20,12 @@ Relax and sleep with great collection of HD sounds that can be mixed into the pe
 ## Quick Start
 
 ```bash
+# Clone the repository
+git clone https://github.com/qdzungpham/redax-sounds.git
+
+# Go inside the directory
+cd redax-sounds
+
 # Install dependencies
 npm install
 
