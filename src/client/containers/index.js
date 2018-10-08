@@ -4,7 +4,7 @@ import MainPlayerContainer from './MainPlayerContainer';
 
 const RootContainer = () => (
   <div>
-    <a href="https://github.com/qdzungpham" className="info" aria-label="GitHub">
+    <a href="https://github.com/qdzungpham/redax-sounds" className="info" aria-label="GitHub">
       <svg
         viewBox="0 0 16 16"
         xmlns="http://www.w3.org/2000/svg"
