@@ -5,7 +5,7 @@ Relax and sleep with great collection of HD sounds that can be mixed into the pe
 ## Features
 
 - Secure via HTTPS using Let's Encrypt - Free SSL/TLS Certificates
-- Works offline
+- Work offline
 - Fully responsive
 - Add to home screen, Splash screen
 
@@ -20,15 +20,21 @@ Relax and sleep with great collection of HD sounds that can be mixed into the pe
 ## Quick Start
 
 ```bash
+# Clone the repository
+git clone https://github.com/qdzungpham/redax-sounds.git
+
+# Go inside the directory
+cd redax-sounds
+
 # Install dependencies
-or npm install
+npm install
 
 # Start development server
-or npm run dev
+npm run dev
 
 # Build for production
-or npm run build
+npm run build
 
 # Start production server
-or npm start
+npm start
 ```
