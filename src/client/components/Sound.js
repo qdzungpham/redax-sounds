@@ -4,7 +4,7 @@ import { Howl } from 'howler';
 
 const noop = () => {};
 
-const BASE_URL = 'https://s3-ap-southeast-2.amazonaws.com/redaxsounds-media/';
+const BASE_URL = 'https://dtvk0tqqvpcdj.cloudfront.net/';
 
 const playStatuses = {
   PLAYING: 'PLAYING',
