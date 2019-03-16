@@ -270,7 +270,7 @@ ReactHowler.defaultProps = {
   onStop: noop,
   onLoad: noop,
   onLoadError: noop,
-  html5: false
+  html5: true
 };
 
 export default ReactHowler;
