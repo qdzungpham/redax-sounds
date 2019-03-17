@@ -1,8 +1,11 @@
 const path = require('path');
+const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const WorkboxPlugin = require('workbox-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
+
+require('dotenv').config();
 
 const outputDirectory = 'dist';
 
@@ -44,6 +47,9 @@ module.exports = {
       template: './public/index.html'
     }),
     new WorkboxPlugin.GenerateSW(),
-    new CopyWebpackPlugin([{ from: 'src/pwa' }])
+    new CopyWebpackPlugin([{ from: 'src/pwa' }]),
+    new webpack.DefinePlugin({
+      'process.env.MEDIA_BASE_URL': JSON.stringify(process.env.MEDIA_BASE_URL)
+    })
   ]
 };

@@ -4,8 +4,6 @@ import { Howl } from 'howler';
 
 const noop = () => {};
 
-const BASE_URL = 'https://dtvk0tqqvpcdj.cloudfront.net/';
-
 const playStatuses = {
   PLAYING: 'PLAYING',
   STOPPED: 'STOPPED',
@@ -56,7 +54,7 @@ class ReactHowler extends Component {
     if (typeof Howl !== 'undefined') {
       // Check if window is available
       this.howler = new Howl({
-        src: `${BASE_URL}${props.src}.webm`,
+        src: `${process.env.MEDIA_BASE_URL}${props.src}.webm`,
         format: props.format,
         mute: props.mute,
         loop: props.loop,
