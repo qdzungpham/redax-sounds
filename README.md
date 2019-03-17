@@ -2,6 +2,8 @@
 
 Relax and sleep with great collection of HD sounds that can be mixed into the perfect relaxing ambiences. Try the [live demo](https://qdzungpham.com/redaxsounds/).
 
+Note: In the current build, sounds cannot be played on iOS devices. I'll try to have pushed out with other updates.
+
 ## Features
 
 - Secure via HTTPS using Let's Encrypt - Free SSL/TLS Certificates
@@ -25,6 +27,9 @@ git clone https://github.com/qdzungpham/redax-sounds.git
 
 # Go inside the directory
 cd redax-sounds
+
+# Modify config file
+Edit base url of your media hosting in .env.example -> Change the file name to .env
 
 # Install dependencies
 npm install
