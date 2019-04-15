@@ -6,7 +6,6 @@ Note: In the current build, sounds cannot be played on iOS devices. I'll try to 
 
 ## Features
 
-- Secure via HTTPS using Let's Encrypt - Free SSL/TLS Certificates
 - Work offline
 - Fully responsive
 - Add to home screen, Splash screen
