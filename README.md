@@ -37,4 +37,8 @@ npm run build
 
 # Start production server
 npm start
+
+# Deploy
+netlify deploy > Command Line Prompts > netlify deploy --prod
+
 ```
