@@ -1,6 +1,6 @@
 # redax-sounds
 
-Relax and sleep with great collection of HD sounds that can be mixed into the perfect relaxing ambiences. Try the [live demo](https://qdzungpham.com/redaxsounds/).
+Relax and sleep with great collection of HD sounds that can be mixed into the perfect relaxing ambiences. Try the [live demo](https://redaxsounds.netlify.com/).
 
 Note: In the current build, sounds cannot be played on iOS devices. I'll try to have pushed out with other updates.
 
