@@ -47,7 +47,11 @@ module.exports = {
       template: './public/index.html'
     }),
     new WorkboxPlugin.GenerateSW(),
-    new CopyWebpackPlugin([{ from: 'src/pwa' }]),
+    new CopyWebpackPlugin({
+      patterns: [
+        { from: 'src/pwa' }
+      ]
+    }),
     new webpack.DefinePlugin({
       'process.env.MEDIA_BASE_URL': JSON.stringify(process.env.MEDIA_BASE_URL)
     })
