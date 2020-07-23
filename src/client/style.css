@@ -12,6 +12,7 @@ body {
 body {
   height: 100vh;
   background: #2196f3;
+  overscroll-behavior-y: contain;
 }
 
 h4 {
